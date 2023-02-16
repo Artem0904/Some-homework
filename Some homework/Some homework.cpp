@@ -21,4 +21,10 @@ int main()
     list<string> li;
 	printCont(li, "Empty list : ");
 
+
+	char letter;
+	cout << "Enter letter to find word by first:" << endl;
+	cin >> letter;
+	auto it = find_if(begin(li), end(li), [&letter](string el) {return el[0] == letter; });
+	cout << "Letter: " << letter << " -> " << *it << endl;
 }
