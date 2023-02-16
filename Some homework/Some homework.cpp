@@ -24,11 +24,11 @@ int main()
 	cout << "Enter search len  : ";
 	int searchLen;
 	cin >> searchLen;
-	cout << "Count of words (len > " << searchLen << ") : " << count_if(begin(li), end(li), [searchLen](string word) {return word.size() < searchLen; });
+	cout << "Count of words (len > " << searchLen << ") : " << count_if(begin(li), end(li), [searchLen](string word) {return word.size() > searchLen; });
 
 
 	char letter;
-	cout << "Enter letter to find word by first:" << endl;
+	cout << "\nEnter letter to find word by first:" << endl;
 	cin >> letter;
 	auto it = find_if(begin(li), end(li), [&letter](string el) {return el[0] == letter; });
 	cout << "Letter: " << letter << " -> " << *it << endl;
