@@ -18,7 +18,12 @@ void printCont(const T& cont, const string& text = "")
 int main()
 {
 
-    list<string> li;
-	printCont(li, "Empty list : ");
+	list<string> li{ "red", "orange", "yellow", "pink", "black", "blue", "grey", "white" };
+	printCont(li, "Colors : ");
+
+	cout << "Enter search len  : ";
+	int searchLen;
+	cin >> searchLen;
+	cout << "Count of words (len > " << searchLen << ") : " << count_if(begin(li), end(li), [searchLen](string word) {return word.size() < searchLen; });
 
 }
