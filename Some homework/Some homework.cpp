@@ -24,25 +24,41 @@ string deleteLastLetter(string& word)
 	word.pop_back();
 	return word;
 }
+bool cmp(string s1, string s2)
+{
+	if (s1.size() == s2.size())
+	{
+		return s1 < s2;
+	}
+	return s1.size() < s2.size();
+}
 int main()
 {
+	//#1 =====================================
 
-	list<string> li{ "", "orange", "yellow", "pink", "black", "blue", "grey", "white" };
+	list<string> li{ "red", "orange", "yellow", "pink", "black", "blue", "grey", "white" };
 	printCont(li, "Colors : ");
+
+	//#2 =====================================
 
 	cout << "Enter search len  : ";
 	int searchLen;
 	cin >> searchLen;
 	cout << "Count of words (len > " << searchLen << ") : " << count_if(begin(li), end(li), [searchLen](string word) {return word.size() > searchLen; });
 
-	// deque
+	//#3* =====================================
+
+
+
+	//#4 deque =====================================
+
 	deque<string> deq(li.size());
 	copy(begin(li), end(li), begin(deq));
 	try
 	{
 		transform(begin(deq), end(deq), begin(deq), deleteLastLetter);
 	}
-	catch(const underflow_error& ex)
+	catch (const underflow_error& ex)
 	{
 		cout << "\nError cant remove last letter : " << ex.what() << endl;
 	}
@@ -54,5 +70,19 @@ int main()
 	cin >> letter;
 	auto it = find_if(begin(li), end(li), [&letter](string el) {return el[0] == letter; });
 	cout << "Letter: " << letter << " -> " << *it << endl;
+
+	//#7 =====================================
+
+	sort(begin(deq), end(deq), cmp);
+	printCont(deq, "Sort by length");
+
+	//#9 =====================================
+
+	cout << endl << endl;
+	printCont(li, "List :");
+	cout << "Enter a letter to remove words that have it : ";
+	cin >> letter;
+	li.remove_if([&letter](string word) {return word.find(letter) != -1; });
+	printCont(li, "New list :");
 
 }
